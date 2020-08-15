@@ -128,3 +128,49 @@
   </section>
 
 </ng-container>
+
+
+
+<!-- Create Course Dialog -->
+
+<div class="k-overlay" *ngIf="createCourseOpened"></div>
+<div class="example-wrapper">
+  <button kendoButton (click)="onCreateCourseDialogOpen()">Open window</button>
+  <p *ngIf="dataSaved">Data has been saved</p>
+  <kendo-window title="Create Course" *ngIf="createCourseOpened" (close)="onCreateCourseDialogClose()" [minWidth]="250" [width]="450" [height]="500">
+
+  <form class="k-form">
+      <fieldset>
+          <legend>Provide Course Details</legend>
+
+          <label class="k-form-field">
+              <span>Course Name</span>
+              <input class="k-textbox" placeholder="Course Name" name="courseName" [(ngModel)]="courseToCreate.name"/>
+          </label>
+          <label class="k-form-field">
+              <span>Course Short Name</span>
+              <input class="k-textbox" placeholder="Course Short Name" name="courseShortName" [(ngModel)]="courseToCreate.shortName"/>
+          </label>
+          <label class="k-form-field">
+            <span>Course Category</span>
+            <kendo-dropdownlist [data]="courseCategories | async" name="courseCategory" [(ngModel)]="courseToCreate.category">
+            </kendo-dropdownlist>
+          </label>
+
+          <label class="k-form-field">
+            <span>Course ID</span>
+            <input class="k-textbox" placeholder="Course ID" name="courseId" [(ngModel)]="courseToCreate.id"/>
+        </label>
+          
+      </fieldset>
+
+      <div class="text-right">
+          <button type="button" class="k-button" (click)="onCreateCourseDialogClose()">Cancel</button>
+          <button type="button" class="k-button k-primary" (click)="submit()">Submit</button>
+      </div>
+  </form>
+
+  </kendo-window>
+</div>
+
+<!-- Create Course Dialog -->

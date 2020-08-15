@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { EditorComponent } from './editor/editor.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { InputsModule } from '@progress/kendo-angular-inputs'
+import { InputsModule } from '@progress/kendo-angular-inputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { WindowModule } from '@progress/kendo-angular-dialog';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -26,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     InputsModule,
     DropDownsModule,
-    ButtonsModule
+    ButtonsModule,
+    WindowModule
   ],
   providers: [],
   bootstrap: [AppComponent]

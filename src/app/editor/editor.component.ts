@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Url } from '../util/util';
 import { stringify } from 'querystring';
+import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -43,6 +44,19 @@ export class EditorComponent implements OnInit {
   library = "";
   extractor = "";
   outputFormat = "";
+
+  //CreateCourse Dialog
+  public createCourseOpened = false;
+  public dataSaved = false;
+  public courseCategories: Observable<any> = of(
+    ['Cateogry 1', 'Category 2']
+  );
+  public courseToCreate = {
+    name: '',
+    shortName: '',
+    category: '',
+    id: ''
+  };
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -202,12 +216,13 @@ export class EditorComponent implements OnInit {
   }
 
   onClickCreateCourse() {
+    this.createCourseOpened = true;
     // TODO: To be replaced from the input from front end
-    let courseName = "DEMO Course 2"
-    let courseShortName = "DEMO 2"
-    let courseIdNumber = 2
-    this.createdItem = "Course";
-    this.createCourse(courseName, courseShortName, environment.moodleWsCourseCategoryId, courseIdNumber);
+    // let courseName = "DEMO Course 2"
+    // let courseShortName = "DEMO 2"
+    // let courseIdNumber = 2
+    // this.createdItem = "Course";
+    // this.createCourse(courseName, courseShortName, environment.moodleWsCourseCategoryId, courseIdNumber);
   }
 
   onClickAddDiscussion() {
@@ -299,6 +314,23 @@ addDiscussionPost() {
     this.displaySuccessTranfer = true;
     this.displayEditor = false;
     this.displayDataExtraction = false;
-  })
+  });
 }
+
+  public onCreateCourseDialogClose() {
+    this.createCourseOpened = false;
+    const {name, shortName, category, id} = this.courseToCreate;
+    this.createCourse(name, shortName, environment.moodleWsCourseCategoryId, parseInt(id));
+
 }
+
+    public onCreateCourseDialogOpen() {
+        this.createCourseOpened = true;
+    }
+
+  public submit() {
+      this.dataSaved = true;
+      this.onCreateCourseDialogClose();
+  }
+}
+
